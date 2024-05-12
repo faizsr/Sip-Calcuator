@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sip_calculator/core/constants/colors.dart';
+import 'package:sip_calculator/core/constants/appcolors.dart';
 
 Decoration kDecoration({required double borderRadius}) {
   return BoxDecoration(
     borderRadius: BorderRadius.circular(borderRadius),
-    color: lWhite,
+    color: AppColors.lWhite,
     boxShadow: const [
       BoxShadow(
         color: Color(0x0D000000),
@@ -15,3 +15,8 @@ Decoration kDecoration({required double borderRadius}) {
     ],
   );
 }
+
+TextStyle kTextStyle = TextStyle(
+  fontSize: 12,
+  color: AppColors.lGray,
+);

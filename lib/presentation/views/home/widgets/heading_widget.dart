@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sip_calculator/core/constants/colors.dart';
-import 'package:sip_calculator/core/constants/stoks_icon_icons.dart';
+import 'package:sip_calculator/core/constants/appcolors.dart';
+import 'package:sip_calculator/core/constants/stoks_icons.dart';
 import 'package:sip_calculator/core/utils/decoration.dart';
 
 class HeadingWidget extends StatelessWidget {
@@ -11,17 +11,17 @@ class HeadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       child: Row(
         children: [
-          const Row(
+          Row(
             children: [
               Icon(
                 StoksIcon.diagram,
-                color: lDarkPurple,
+                color: AppColors.lDarkPurple,
                 size: 30,
               ),
-              Text(
+              const Text(
                 'STOKS',
                 style: TextStyle(
                   fontSize: 21,
