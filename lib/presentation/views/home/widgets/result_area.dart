@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:sip_calculator/core/constants/appcolors.dart';
+import 'package:sip_calculator/core/constants/apptextstyles.dart';
+import 'package:sip_calculator/presentation/widgets/progress_indicator.dart';
+import 'package:sip_calculator/presentation/controllers/calc_switch_controller.dart';
+import 'package:sip_calculator/presentation/controllers/lumpsum_controller.dart';
 import 'package:sip_calculator/presentation/controllers/sip_controller.dart';
 import 'package:sip_calculator/presentation/views/home/widgets/amount_card.dart';
 
@@ -22,17 +27,19 @@ class ResultArea extends StatelessWidget {
   }
 
   Column progressSide() {
+    final sipController = Get.put(SipController());
+    final lumpSumController = Get.put(LumpSumController());
+    final calcSwitchController = Get.put(CalcSwitchController());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        CircleAvatar(
-          radius: 87.5,
-          child: Center(
-            child: CircleAvatar(
-              backgroundColor: AppColors.lTan,
-              radius: 50,
-            ),
-          ),
+        Obx(
+          () {
+            double endPercent = calcSwitchController.selectedValue
+                ? sipController.returnPercent
+                : lumpSumController.returnPercent;
+            return CustomProgressIndicator(endPercent: endPercent);
+          },
         ),
         const SizedBox(height: 20),
         Column(
@@ -61,7 +68,7 @@ class ResultArea extends StatelessWidget {
         const SizedBox(width: 10),
         Text(
           title,
-          style: const TextStyle(fontSize: 12),
+          style: AppTextStyles.main,
         )
       ],
     );
@@ -69,22 +76,43 @@ class ResultArea extends StatelessWidget {
 
   Obx amountSide() {
     final sipController = Get.put(SipController());
+    final lumpSumController = Get.put(LumpSumController());
+    final calcSwitchController = Get.put(CalcSwitchController());
+    final formatToSimpleCurrency = NumberFormat.simpleCurrency(locale: 'en_IN');
+    final formatToCompactCurrency = NumberFormat.compactLong(locale: 'en_IN');
+    formatToSimpleCurrency.maximumFractionDigits = 0;
 
     return Obx(
       () {
+        int investedAmount = calcSwitchController.selectedValue
+            ? sipController.totalInvestedAmount
+            : lumpSumController.investedAmount;
+        int estimatedReturn = calcSwitchController.selectedValue
+            ? sipController.estimatedReturn
+            : lumpSumController.estimatedReturn;
+        int totalReturn = calcSwitchController.selectedValue
+            ? sipController.totalReturn
+            : lumpSumController.totalReturn;
+
         return Column(
           children: [
             AmountCard(
               title: 'Invested Amount',
-              amount: '${sipController.investedAmount}',
+              amount: '$investedAmount'.length > 9
+                  ? formatToCompactCurrency.format(investedAmount)
+                  : formatToSimpleCurrency.format(investedAmount),
             ),
             AmountCard(
               title: 'Estimated Amount',
-              amount: '${sipController.estimatedReturn}',
+              amount: '$estimatedReturn'.length > 9
+                  ? formatToCompactCurrency.format(estimatedReturn)
+                  : formatToSimpleCurrency.format(estimatedReturn),
             ),
             AmountCard(
               title: 'Total Amount',
-              amount: '${sipController.totalReturn}',
+              amount: '$totalReturn'.length > 9
+                  ? formatToCompactCurrency.format(totalReturn)
+                  : formatToSimpleCurrency.format(totalReturn),
             ),
           ],
         );

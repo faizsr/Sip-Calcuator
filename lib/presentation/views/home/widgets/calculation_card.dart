@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sip_calculator/presentation/controllers/calc_switch_controller.dart';
+import 'package:sip_calculator/presentation/views/home/widgets/lumpsum_calculator.dart';
 import 'package:sip_calculator/presentation/views/home/widgets/sip_calculator.dart';
 import 'package:sip_calculator/presentation/views/home/widgets/tabbar_button.dart';
 
@@ -17,9 +18,11 @@ class CalculationArea extends StatelessWidget {
         const TabbarButton(),
 
         // ============= Tabbar View =============
-        Obx(() => calcSwitchCntr.selectedValue
-            ? const SipCalculator(investmentType: 'Monthy Investment')
-            : const SipCalculator(investmentType: 'Total Investment')),
+        Obx(
+          () => calcSwitchCntr.selectedValue
+              ? const SipCalculator()
+              : const LumpSumCalculator(),
+        ),
       ],
     );
   }

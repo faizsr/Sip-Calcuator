@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:sip_calculator/core/constants/appcolors.dart';
-import 'package:sip_calculator/core/utils/decoration.dart';
+import 'package:sip_calculator/core/constants/apptextstyles.dart';
 import 'package:sip_calculator/core/utils/gap.dart';
 import 'package:sip_calculator/core/utils/thumb_shape.dart';
 import 'package:sip_calculator/core/utils/track_shape.dart';
+import 'package:sip_calculator/presentation/widgets/custom_text_field.dart';
+import 'package:sip_calculator/presentation/controllers/sip_controller.dart';
 
 class SliderWidget extends StatefulWidget {
   final String title;
@@ -14,6 +17,7 @@ class SliderWidget extends StatefulWidget {
   final String end;
   final double maxValue;
   final int? divisions;
+  final TextEditingController controller;
   final void Function(double)? onSliderChanged;
   final void Function(String)? onTextChanged;
   final List<TextInputFormatter>? inputFormatters;
@@ -26,6 +30,7 @@ class SliderWidget extends StatefulWidget {
     required this.end,
     required this.maxValue,
     this.divisions,
+    required this.controller,
     required this.onSliderChanged,
     required this.onTextChanged,
     required this.inputFormatters,
@@ -36,13 +41,7 @@ class SliderWidget extends StatefulWidget {
 }
 
 class _SliderWidgetState extends State<SliderWidget> {
-  final textController = TextEditingController();
-
-  @override
-  void initState() {
-    textController.text = widget.value;
-    super.initState();
-  }
+  final sipController = Get.put(SipController());
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +55,17 @@ class _SliderWidgetState extends State<SliderWidget> {
                 flex: 5,
                 child: Text(
                   widget.title,
-                  style: kTextStyle,
+                  style: AppTextStyles.light,
                 ),
               ),
               Expanded(
                 flex: 2,
-                child: valueInputField(),
-              )
+                child: CustomTextField(
+                  controller: widget.controller,
+                  inputFormatters: widget.inputFormatters,
+                  onTextChanged: widget.onTextChanged,
+                ),
+              ),
             ],
           ),
           gap(0, 10),
@@ -87,43 +90,16 @@ class _SliderWidgetState extends State<SliderWidget> {
             children: [
               Text(
                 widget.start,
-                style: kTextStyle,
+                style: AppTextStyles.light,
               ),
               const Spacer(),
               Text(
                 widget.end,
-                style: kTextStyle,
+                style: AppTextStyles.light,
               ),
             ],
           )
         ],
-      ),
-    );
-  }
-
-  TextFormField valueInputField() {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      controller: textController,
-      textAlign: TextAlign.end,
-      onChanged: widget.onTextChanged,
-      textAlignVertical: TextAlignVertical.center,
-      inputFormatters: widget.inputFormatters,
-      style: TextStyle(
-        fontSize: 13,
-        color: AppColors.lDarkPurple,
-      ),
-      decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: AppColors.lGray),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(6),
-          borderSide: BorderSide(color: AppColors.lGray),
-        ),
-        isDense: true,
-        contentPadding: const EdgeInsets.fromLTRB(0, 3, 8, 3),
       ),
     );
   }

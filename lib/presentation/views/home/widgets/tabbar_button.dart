@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sip_calculator/core/constants/appcolors.dart';
+import 'package:sip_calculator/core/constants/apptextstyles.dart';
 import 'package:sip_calculator/core/utils/decoration.dart';
 import 'package:sip_calculator/presentation/controllers/calc_switch_controller.dart';
 
@@ -74,13 +74,7 @@ class _TabbarButtonState extends State<TabbarButton> {
           height: 30,
           color: Colors.transparent,
           alignment: Alignment.center,
-          child: Text(
-            title,
-            style: TextStyle(
-              color: AppColors.lDarkPurple,
-              fontSize: 12,
-            ),
-          ),
+          child: Text(title, style: AppTextStyles.main),
         ),
       ),
     );

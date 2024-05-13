@@ -1,22 +1,22 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SipController extends GetxController {
+class LumpSumController extends GetxController {
   // ============== Values for Caluclation ==============
-  final _monthyInvestment = 0.obs;
+  final _investedAmount = 0.obs;
   final _interestRate = 0.obs;
   final _totalYears = 0.obs;
 
-  int get monthlyInvestment => _monthyInvestment.value;
+  int get investedAmount => _investedAmount.value;
   int get interestRate => _interestRate.value;
   int get totalYears => _totalYears.value;
 
   // ============== Result Values ==============
-  final _totalInvestedAmount = 0.obs;
   final _estimatedReturn = 0.obs;
   final _totalReturn = 0.obs;
 
-  int get totalInvestedAmount => _totalInvestedAmount.value;
   int get estimatedReturn => _estimatedReturn.value;
   int get totalReturn => _totalReturn.value;
 
@@ -26,32 +26,32 @@ class SipController extends GetxController {
   double get returnPercent => _returnPercent.value;
 
   // ============== Value Input Controllers ==============
-  final _monthlyTextController = TextEditingController().obs;
+  final _totalTextController = TextEditingController().obs;
   final _interestTextController = TextEditingController().obs;
   final _yearTextController = TextEditingController().obs;
 
-  TextEditingController get monthlyTextController =>
-      _monthlyTextController.value;
+  TextEditingController get investedTextController =>
+      _totalTextController.value;
   TextEditingController get interestTextController =>
       _interestTextController.value;
   TextEditingController get yearTextController => _yearTextController.value;
 
   @override
   void onInit() {
-    _monthyInvestment.value = 25000;
-    _interestRate.value = 12;
-    _totalYears.value = 10;
-    monthlyTextController.text = monthlyInvestment.toString();
+    _investedAmount.value = 20000;
+    _interestRate.value = 5;
+    _totalYears.value = 20;
+    investedTextController.text = investedAmount.toString();
     interestTextController.text = interestRate.toString();
     yearTextController.text = totalYears.toString();
-    calculateSip();
+    calculateLumpsum();
     super.onInit();
   }
 
-  // ============== Set Monthly Invested Amount ==============
-  void setMonthyInvestMent(int value) {
-    _monthyInvestment.value = value;
-    monthlyTextController.text = monthlyInvestment.toString();
+  // ============== Set Invested Amount ==============
+  void setInvestedAmount(int value) {
+    _investedAmount.value = value;
+    investedTextController.text = investedAmount.toString();
   }
 
   // ============== Set Interest Rate ==============
@@ -66,19 +66,14 @@ class SipController extends GetxController {
     yearTextController.text = totalYears.toString();
   }
 
-  // ============== Calculating SIP ==============
-  void calculateSip() {
-    double monthlyInterestRate = interestRate / 12 / 100;
-    int totalMonths = totalYears * 12;
-    double futureValue = 0;
+  // ============== Calculating Lumpsum ==============
+  void calculateLumpsum() {
+    double annualInterestRate = interestRate / 100;
+    double futureValue =
+        investedAmount * pow((1 + annualInterestRate), totalYears).toDouble();
 
-    for (int i = 0; i < totalMonths; i++) {
-      futureValue =
-          (futureValue + monthlyInvestment) * (1 + monthlyInterestRate);
-    }
-    _totalInvestedAmount.value = monthlyInvestment * totalMonths;
     _totalReturn.value = futureValue.round();
-    _estimatedReturn.value = totalReturn - totalInvestedAmount;
+    _estimatedReturn.value = totalReturn - investedAmount;
 
     // ============== Calulating Progress Percent ==============
     _returnPercent.value = (estimatedReturn / totalReturn) * 100 / 100;

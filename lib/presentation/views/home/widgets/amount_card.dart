@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:sip_calculator/core/constants/apptextstyles.dart';
 import 'package:sip_calculator/core/utils/decoration.dart';
 
 class AmountCard extends StatelessWidget {
@@ -14,16 +15,16 @@ class AmountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
-      padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
-      width: MediaQuery.of(context).size.width / 2.8,
+      padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+      width: MediaQuery.of(context).size.width / 2.6,
       decoration: kDecoration(borderRadius: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: kTextStyle),
+          Text(title, style: AppTextStyles.light),
           Text(
             amount,
-            style: const TextStyle(fontSize: 20),
+            style: AppTextStyles.button,
           )
         ],
       ),

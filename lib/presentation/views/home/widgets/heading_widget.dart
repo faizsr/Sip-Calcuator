@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sip_calculator/core/constants/appcolors.dart';
+import 'package:sip_calculator/core/constants/apptextstyles.dart';
 import 'package:sip_calculator/core/constants/stoks_icons.dart';
 import 'package:sip_calculator/core/utils/decoration.dart';
 
@@ -21,23 +22,16 @@ class HeadingWidget extends StatelessWidget {
                 color: AppColors.lDarkPurple,
                 size: 30,
               ),
-              const Text(
-                'STOKS',
-                style: TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
+              Text('STOKS', style: AppTextStyles.heading),
             ],
           ),
           const Spacer(),
           Container(
             decoration: kDecoration(borderRadius: 50),
             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
-            child: const Text(
+            child: Text(
               'Sip Calculator',
-              style: TextStyle(fontSize: 13),
+              style: AppTextStyles.main,
             ),
           ),
         ],

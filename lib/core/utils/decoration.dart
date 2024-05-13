@@ -15,8 +15,3 @@ Decoration kDecoration({required double borderRadius}) {
     ],
   );
 }
-
-TextStyle kTextStyle = TextStyle(
-  fontSize: 12,
-  color: AppColors.lGray,
-);
