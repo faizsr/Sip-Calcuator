@@ -51,19 +51,25 @@ class LumpSumController extends GetxController {
   // ============== Set Invested Amount ==============
   void setInvestedAmount(int value) {
     _investedAmount.value = value;
-    investedTextController.text = investedAmount.toString();
+    investedTextController.value = investedTextController.value.copyWith(
+      text: value.toString(),
+    );
   }
 
   // ============== Set Interest Rate ==============
   void setInterestRate(int rate) {
     _interestRate.value = rate;
-    interestTextController.text = interestRate.toString();
+    interestTextController.value = interestTextController.value.copyWith(
+      text: rate.toString(),
+    );
   }
 
   // ============== Set Total Years ==============
   void setTotalYears(int years) {
     _totalYears.value = years;
-    yearTextController.text = totalYears.toString();
+    yearTextController.value = yearTextController.value.copyWith(
+      text: years.toString(),
+    );
   }
 
   // ============== Calculating Lumpsum ==============

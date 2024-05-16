@@ -30,7 +30,7 @@ class HeadingWidget extends StatelessWidget {
             decoration: kDecoration(borderRadius: 50),
             padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: Text(
-              'Sip Calculator',
+              'Calculator',
               style: AppTextStyles.main,
             ),
           ),

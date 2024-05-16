@@ -84,7 +84,7 @@ class _SipCalculatorState extends State<SipCalculator> {
                 },
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(
-                    RegExp(r'^[1-4][0-9]?$'),
+                    RegExp(r'^(3[00]|[12][0-9]|[1-9])$'),
                     replacementString: '${sipController.interestRate}',
                   ),
                 ],
@@ -116,7 +116,7 @@ class _SipCalculatorState extends State<SipCalculator> {
                 },
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(
-                    RegExp(r'^[1-4][0-9]?$'),
+                    RegExp(r'^(4[0-0]|[1-3][0-9]|[1-9])$'),
                     replacementString: '${sipController.totalYears}',
                   ),
                 ],

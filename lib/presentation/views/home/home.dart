@@ -13,11 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<bool> isSelected = [
-    false,
-    false,
-  ];
-
   @override
   Widget build(BuildContext context) {
     mySystemTheme(context);

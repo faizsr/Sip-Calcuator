@@ -51,19 +51,25 @@ class SipController extends GetxController {
   // ============== Set Monthly Invested Amount ==============
   void setMonthyInvestMent(int value) {
     _monthyInvestment.value = value;
-    monthlyTextController.text = monthlyInvestment.toString();
+    monthlyTextController.value = monthlyTextController.value.copyWith(
+      text: value.toString(),
+    );
   }
 
   // ============== Set Interest Rate ==============
   void setInterestRate(int rate) {
     _interestRate.value = rate;
-    interestTextController.text = interestRate.toString();
+    interestTextController.value = interestTextController.value.copyWith(
+      text: rate.toString(),
+    );
   }
 
   // ============== Set Total Years ==============
   void setTotalYears(int years) {
     _totalYears.value = years;
-    yearTextController.text = totalYears.toString();
+    yearTextController.value = yearTextController.value.copyWith(
+      text: years.toString(),
+    );
   }
 
   // ============== Calculating SIP ==============
